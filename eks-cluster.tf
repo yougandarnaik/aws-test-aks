@@ -1,6 +1,6 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "18.30.2"
+  version = "19.10.0"
   cluster_name    = local.cluster_name
   cluster_version = "1.25"
   vpc_id     = module.vpc.vpc_id
@@ -21,33 +21,33 @@ module "eks" {
     one = {
       name = "node-group-1"
       instance_types = ["t2.medium"]
-      terraform resource "kubernetes_validating_webhook_configuration" "example" {
-      metadata {
-        name = "test.terraform.io"
-      }
+      # terraform resource "kubernetes_validating_webhook_configuration" "example" {
+      # metadata {
+      #   name = "test.terraform.io"
+      # }
 
-      webhook {
-        name = "test.terraform.io"
-        admission_review_versions = ["v1", "v1beta1"]
+      # webhook {
+      #   name = "test.terraform.io"
+      #   admission_review_versions = ["v1", "v1beta1"]
 
-        client_config {
-          service {
-            namespace = "example-namespace"
-            name      = "example-service"
-          }
-        }
+      #   client_config {
+      #     service {
+      #       namespace = "example-namespace"
+      #       name      = "example-service"
+      #     }
+      #   }
 
-        rule {
-          api_groups   = ["apps"]
-          api_versions = ["v1"]
-          operations   = ["CREATE"]
-          resources    = ["deployments"]
-          scope        = "Namespaced"
-        }
+      #   rule {
+      #     api_groups   = ["apps"]
+      #     api_versions = ["v1"]
+      #     operations   = ["CREATE"]
+      #     resources    = ["deployments"]
+      #     scope        = "Namespaced"
+      #   }
 
-        side_effects = "None"
-      }
-      }
+      #   side_effects = "None"
+      # }
+      # }
       min_size     = 3
       max_size     = 5
       desired_size = 3
