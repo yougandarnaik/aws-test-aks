@@ -11,4 +11,8 @@ resource "aws_security_group" "yogitest-nsg" {
       "10.0.0.0/8",
     ]
   }
+    tags = {
+    Terraform = "true"
+    Environment = "test"
+  }
 }
