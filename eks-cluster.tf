@@ -1,6 +1,6 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "19.10.0"
+  #version = "2.18.1"
   cluster_name    = local.cluster_name
   cluster_version = "1.25"
   vpc_id     = module.vpc.vpc_id
@@ -20,7 +20,7 @@ module "eks" {
   eks_managed_node_groups = {
     one = {
       name = "node-group-1"
-      instance_types = ["t2.medium"]
+      instance_types = ["t3.medium"]
       # terraform resource "kubernetes_validating_webhook_configuration" "example" {
       # metadata {
       #   name = "test.terraform.io"
@@ -56,9 +56,9 @@ module "eks" {
       echo 'forty-two'
       EOT
 
-      vpc_security_group_ids = [
-        aws_security_group.node_group_one.id
-      ]
+      # vpc_security_group_ids = [
+      #   aws_security_group.node_group_one.id
+      # ]
     }
   }
     tags = {
